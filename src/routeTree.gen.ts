@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LearnersIndexRouteImport } from './routes/learners.index'
+import { Route as LearnersLearnerIdRouteImport } from './routes/learners.$learnerId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,30 +23,39 @@ const LearnersIndexRoute = LearnersIndexRouteImport.update({
   path: '/learners/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LearnersLearnerIdRoute = LearnersLearnerIdRouteImport.update({
+  id: '/learners/$learnerId',
+  path: '/learners/$learnerId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners/': typeof LearnersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners': typeof LearnersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners/': typeof LearnersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/learners/'
+  fullPaths: '/' | '/learners/$learnerId' | '/learners/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/learners'
-  id: '__root__' | '/' | '/learners/'
+  to: '/' | '/learners/$learnerId' | '/learners'
+  id: '__root__' | '/' | '/learners/$learnerId' | '/learners/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LearnersLearnerIdRoute: typeof LearnersLearnerIdRoute
   LearnersIndexRoute: typeof LearnersIndexRoute
 }
 
@@ -65,11 +75,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/learners/$learnerId': {
+      id: '/learners/$learnerId'
+      path: '/learners/$learnerId'
+      fullPath: '/learners/$learnerId'
+      preLoaderRoute: typeof LearnersLearnerIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LearnersLearnerIdRoute: LearnersLearnerIdRoute,
   LearnersIndexRoute: LearnersIndexRoute,
 }
 export const routeTree = rootRouteImport
