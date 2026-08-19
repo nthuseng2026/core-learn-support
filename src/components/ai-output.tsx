@@ -33,12 +33,12 @@ export function AiOutput({
 }: {
   value: string;
   onChange: (next: string) => void;
-  onRegenerate?: () => void;
-  onSave?: () => void;
-  loading?: boolean;
-  saveLabel?: string;
-  emptyHint?: string;
-  extraActions?: React.ReactNode;
+  onRegenerate?: (() => void) | undefined;
+  onSave?: (() => void) | undefined;
+  loading?: boolean | undefined;
+  saveLabel?: string | undefined;
+  emptyHint?: string | undefined;
+  extraActions?: React.ReactNode | undefined;
 }) {
   const [editing, setEditing] = useState(false);
 

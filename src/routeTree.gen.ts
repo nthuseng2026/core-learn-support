@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LearningChecksRouteImport } from './routes/learning-checks'
 import { Route as LearnersIndexRouteImport } from './routes/learners.index'
 import { Route as LearnersLearnerIdRouteImport } from './routes/learners.$learnerId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LearningChecksRoute = LearningChecksRouteImport.update({
+  id: '/learning-checks',
+  path: '/learning-checks',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LearnersIndexRoute = LearnersIndexRouteImport.update({
@@ -31,30 +37,39 @@ const LearnersLearnerIdRoute = LearnersLearnerIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/learning-checks': typeof LearningChecksRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners/': typeof LearnersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/learning-checks': typeof LearningChecksRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners': typeof LearnersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/learning-checks': typeof LearningChecksRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners/': typeof LearnersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/learners/$learnerId' | '/learners/'
+  fullPaths: '/' | '/learning-checks' | '/learners/$learnerId' | '/learners/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/learners/$learnerId' | '/learners'
-  id: '__root__' | '/' | '/learners/$learnerId' | '/learners/'
+  to: '/' | '/learning-checks' | '/learners/$learnerId' | '/learners'
+  id:
+    | '__root__'
+    | '/'
+    | '/learning-checks'
+    | '/learners/$learnerId'
+    | '/learners/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LearningChecksRoute: typeof LearningChecksRoute
   LearnersLearnerIdRoute: typeof LearnersLearnerIdRoute
   LearnersIndexRoute: typeof LearnersIndexRoute
 }
@@ -66,6 +81,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/learning-checks': {
+      id: '/learning-checks'
+      path: '/learning-checks'
+      fullPath: '/learning-checks'
+      preLoaderRoute: typeof LearningChecksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/learners/': {
@@ -87,6 +109,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LearningChecksRoute: LearningChecksRoute,
   LearnersLearnerIdRoute: LearnersLearnerIdRoute,
   LearnersIndexRoute: LearnersIndexRoute,
 }
