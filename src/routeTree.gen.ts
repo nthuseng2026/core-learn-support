@@ -16,6 +16,7 @@ import { Route as LearningChecksRouteImport } from './routes/learning-checks'
 import { Route as LearningPlansRouteImport } from './routes/learning-plans'
 import { Route as ParentCommunicationRouteImport } from './routes/parent-communication'
 import { Route as ProgressRouteImport } from './routes/progress'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as LearnersIndexRouteImport } from './routes/learners.index'
 import { Route as LearnersLearnerIdRouteImport } from './routes/learners.$learnerId'
 
@@ -54,6 +55,11 @@ const ProgressRoute = ProgressRouteImport.update({
   path: '/progress',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LearnersIndexRoute = LearnersIndexRouteImport.update({
   id: '/learners/',
   path: '/learners/',
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/learning-plans': typeof LearningPlansRoute
   '/parent-communication': typeof ParentCommunicationRoute
   '/progress': typeof ProgressRoute
+  '/settings': typeof SettingsRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners/': typeof LearnersIndexRoute
 }
@@ -84,6 +91,7 @@ export interface FileRoutesByTo {
   '/learning-plans': typeof LearningPlansRoute
   '/parent-communication': typeof ParentCommunicationRoute
   '/progress': typeof ProgressRoute
+  '/settings': typeof SettingsRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners': typeof LearnersIndexRoute
 }
@@ -96,6 +104,7 @@ export interface FileRoutesById {
   '/learning-plans': typeof LearningPlansRoute
   '/parent-communication': typeof ParentCommunicationRoute
   '/progress': typeof ProgressRoute
+  '/settings': typeof SettingsRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners/': typeof LearnersIndexRoute
 }
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/learning-plans'
     | '/parent-communication'
     | '/progress'
+    | '/settings'
     | '/learners/$learnerId'
     | '/learners/'
   fileRoutesByTo: FileRoutesByTo
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/learning-plans'
     | '/parent-communication'
     | '/progress'
+    | '/settings'
     | '/learners/$learnerId'
     | '/learners'
   id:
@@ -131,6 +142,7 @@ export interface FileRouteTypes {
     | '/learning-plans'
     | '/parent-communication'
     | '/progress'
+    | '/settings'
     | '/learners/$learnerId'
     | '/learners/'
   fileRoutesById: FileRoutesById
@@ -143,6 +155,7 @@ export interface RootRouteChildren {
   LearningPlansRoute: typeof LearningPlansRoute
   ParentCommunicationRoute: typeof ParentCommunicationRoute
   ProgressRoute: typeof ProgressRoute
+  SettingsRoute: typeof SettingsRoute
   LearnersLearnerIdRoute: typeof LearnersLearnerIdRoute
   LearnersIndexRoute: typeof LearnersIndexRoute
 }
@@ -198,6 +211,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgressRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/learners/': {
       id: '/learners/'
       path: '/learners'
@@ -223,6 +243,7 @@ const rootRouteChildren: RootRouteChildren = {
   LearningPlansRoute: LearningPlansRoute,
   ParentCommunicationRoute: ParentCommunicationRoute,
   ProgressRoute: ProgressRoute,
+  SettingsRoute: SettingsRoute,
   LearnersLearnerIdRoute: LearnersLearnerIdRoute,
   LearnersIndexRoute: LearnersIndexRoute,
 }
