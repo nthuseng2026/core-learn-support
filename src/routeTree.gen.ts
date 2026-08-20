@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ActivitiesRouteImport } from './routes/activities'
+import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as LearningChecksRouteImport } from './routes/learning-checks'
 import { Route as LearningPlansRouteImport } from './routes/learning-plans'
 import { Route as ParentCommunicationRouteImport } from './routes/parent-communication'
@@ -26,6 +27,11 @@ const IndexRoute = IndexRouteImport.update({
 const ActivitiesRoute = ActivitiesRouteImport.update({
   id: '/activities',
   path: '/activities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssistantRoute = AssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LearningChecksRoute = LearningChecksRouteImport.update({
@@ -62,6 +68,7 @@ const LearnersLearnerIdRoute = LearnersLearnerIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/activities': typeof ActivitiesRoute
+  '/assistant': typeof AssistantRoute
   '/learning-checks': typeof LearningChecksRoute
   '/learning-plans': typeof LearningPlansRoute
   '/parent-communication': typeof ParentCommunicationRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/activities': typeof ActivitiesRoute
+  '/assistant': typeof AssistantRoute
   '/learning-checks': typeof LearningChecksRoute
   '/learning-plans': typeof LearningPlansRoute
   '/parent-communication': typeof ParentCommunicationRoute
@@ -83,6 +91,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/activities': typeof ActivitiesRoute
+  '/assistant': typeof AssistantRoute
   '/learning-checks': typeof LearningChecksRoute
   '/learning-plans': typeof LearningPlansRoute
   '/parent-communication': typeof ParentCommunicationRoute
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/activities'
+    | '/assistant'
     | '/learning-checks'
     | '/learning-plans'
     | '/parent-communication'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/activities'
+    | '/assistant'
     | '/learning-checks'
     | '/learning-plans'
     | '/parent-communication'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/activities'
+    | '/assistant'
     | '/learning-checks'
     | '/learning-plans'
     | '/parent-communication'
@@ -126,6 +138,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ActivitiesRoute: typeof ActivitiesRoute
+  AssistantRoute: typeof AssistantRoute
   LearningChecksRoute: typeof LearningChecksRoute
   LearningPlansRoute: typeof LearningPlansRoute
   ParentCommunicationRoute: typeof ParentCommunicationRoute
@@ -148,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/activities'
       fullPath: '/activities'
       preLoaderRoute: typeof ActivitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistant': {
+      id: '/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/learning-checks': {
@@ -198,6 +218,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ActivitiesRoute: ActivitiesRoute,
+  AssistantRoute: AssistantRoute,
   LearningChecksRoute: LearningChecksRoute,
   LearningPlansRoute: LearningPlansRoute,
   ParentCommunicationRoute: ParentCommunicationRoute,
