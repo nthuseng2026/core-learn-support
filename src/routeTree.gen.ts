@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ActivitiesRouteImport } from './routes/activities'
 import { Route as LearningChecksRouteImport } from './routes/learning-checks'
 import { Route as LearningPlansRouteImport } from './routes/learning-plans'
+import { Route as ParentCommunicationRouteImport } from './routes/parent-communication'
 import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as LearnersIndexRouteImport } from './routes/learners.index'
 import { Route as LearnersLearnerIdRouteImport } from './routes/learners.$learnerId'
@@ -37,6 +38,11 @@ const LearningPlansRoute = LearningPlansRouteImport.update({
   path: '/learning-plans',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ParentCommunicationRoute = ParentCommunicationRouteImport.update({
+  id: '/parent-communication',
+  path: '/parent-communication',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProgressRoute = ProgressRouteImport.update({
   id: '/progress',
   path: '/progress',
@@ -58,6 +64,7 @@ export interface FileRoutesByFullPath {
   '/activities': typeof ActivitiesRoute
   '/learning-checks': typeof LearningChecksRoute
   '/learning-plans': typeof LearningPlansRoute
+  '/parent-communication': typeof ParentCommunicationRoute
   '/progress': typeof ProgressRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners/': typeof LearnersIndexRoute
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/activities': typeof ActivitiesRoute
   '/learning-checks': typeof LearningChecksRoute
   '/learning-plans': typeof LearningPlansRoute
+  '/parent-communication': typeof ParentCommunicationRoute
   '/progress': typeof ProgressRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners': typeof LearnersIndexRoute
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/activities': typeof ActivitiesRoute
   '/learning-checks': typeof LearningChecksRoute
   '/learning-plans': typeof LearningPlansRoute
+  '/parent-communication': typeof ParentCommunicationRoute
   '/progress': typeof ProgressRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners/': typeof LearnersIndexRoute
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/activities'
     | '/learning-checks'
     | '/learning-plans'
+    | '/parent-communication'
     | '/progress'
     | '/learners/$learnerId'
     | '/learners/'
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/activities'
     | '/learning-checks'
     | '/learning-plans'
+    | '/parent-communication'
     | '/progress'
     | '/learners/$learnerId'
     | '/learners'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/activities'
     | '/learning-checks'
     | '/learning-plans'
+    | '/parent-communication'
     | '/progress'
     | '/learners/$learnerId'
     | '/learners/'
@@ -116,6 +128,7 @@ export interface RootRouteChildren {
   ActivitiesRoute: typeof ActivitiesRoute
   LearningChecksRoute: typeof LearningChecksRoute
   LearningPlansRoute: typeof LearningPlansRoute
+  ParentCommunicationRoute: typeof ParentCommunicationRoute
   ProgressRoute: typeof ProgressRoute
   LearnersLearnerIdRoute: typeof LearnersLearnerIdRoute
   LearnersIndexRoute: typeof LearnersIndexRoute
@@ -151,6 +164,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearningPlansRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/parent-communication': {
+      id: '/parent-communication'
+      path: '/parent-communication'
+      fullPath: '/parent-communication'
+      preLoaderRoute: typeof ParentCommunicationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/progress': {
       id: '/progress'
       path: '/progress'
@@ -180,6 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   ActivitiesRoute: ActivitiesRoute,
   LearningChecksRoute: LearningChecksRoute,
   LearningPlansRoute: LearningPlansRoute,
+  ParentCommunicationRoute: ParentCommunicationRoute,
   ProgressRoute: ProgressRoute,
   LearnersLearnerIdRoute: LearnersLearnerIdRoute,
   LearnersIndexRoute: LearnersIndexRoute,
