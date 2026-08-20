@@ -10,14 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActivitiesRouteImport } from './routes/activities'
+import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as LearningChecksRouteImport } from './routes/learning-checks'
 import { Route as LearningPlansRouteImport } from './routes/learning-plans'
+import { Route as ParentCommunicationRouteImport } from './routes/parent-communication'
+import { Route as ProgressRouteImport } from './routes/progress'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as LearnersIndexRouteImport } from './routes/learners.index'
 import { Route as LearnersLearnerIdRouteImport } from './routes/learners.$learnerId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivitiesRoute = ActivitiesRouteImport.update({
+  id: '/activities',
+  path: '/activities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssistantRoute = AssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LearningChecksRoute = LearningChecksRouteImport.update({
@@ -28,6 +43,21 @@ const LearningChecksRoute = LearningChecksRouteImport.update({
 const LearningPlansRoute = LearningPlansRouteImport.update({
   id: '/learning-plans',
   path: '/learning-plans',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParentCommunicationRoute = ParentCommunicationRouteImport.update({
+  id: '/parent-communication',
+  path: '/parent-communication',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgressRoute = ProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LearnersIndexRoute = LearnersIndexRouteImport.update({
@@ -43,23 +73,38 @@ const LearnersLearnerIdRoute = LearnersLearnerIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
+  '/assistant': typeof AssistantRoute
   '/learning-checks': typeof LearningChecksRoute
   '/learning-plans': typeof LearningPlansRoute
+  '/parent-communication': typeof ParentCommunicationRoute
+  '/progress': typeof ProgressRoute
+  '/settings': typeof SettingsRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners/': typeof LearnersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
+  '/assistant': typeof AssistantRoute
   '/learning-checks': typeof LearningChecksRoute
   '/learning-plans': typeof LearningPlansRoute
+  '/parent-communication': typeof ParentCommunicationRoute
+  '/progress': typeof ProgressRoute
+  '/settings': typeof SettingsRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners': typeof LearnersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
+  '/assistant': typeof AssistantRoute
   '/learning-checks': typeof LearningChecksRoute
   '/learning-plans': typeof LearningPlansRoute
+  '/parent-communication': typeof ParentCommunicationRoute
+  '/progress': typeof ProgressRoute
+  '/settings': typeof SettingsRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
   '/learners/': typeof LearnersIndexRoute
 }
@@ -67,30 +112,50 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/activities'
+    | '/assistant'
     | '/learning-checks'
     | '/learning-plans'
+    | '/parent-communication'
+    | '/progress'
+    | '/settings'
     | '/learners/$learnerId'
     | '/learners/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/activities'
+    | '/assistant'
     | '/learning-checks'
     | '/learning-plans'
+    | '/parent-communication'
+    | '/progress'
+    | '/settings'
     | '/learners/$learnerId'
     | '/learners'
   id:
     | '__root__'
     | '/'
+    | '/activities'
+    | '/assistant'
     | '/learning-checks'
     | '/learning-plans'
+    | '/parent-communication'
+    | '/progress'
+    | '/settings'
     | '/learners/$learnerId'
     | '/learners/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivitiesRoute: typeof ActivitiesRoute
+  AssistantRoute: typeof AssistantRoute
   LearningChecksRoute: typeof LearningChecksRoute
   LearningPlansRoute: typeof LearningPlansRoute
+  ParentCommunicationRoute: typeof ParentCommunicationRoute
+  ProgressRoute: typeof ProgressRoute
+  SettingsRoute: typeof SettingsRoute
   LearnersLearnerIdRoute: typeof LearnersLearnerIdRoute
   LearnersIndexRoute: typeof LearnersIndexRoute
 }
@@ -102,6 +167,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activities': {
+      id: '/activities'
+      path: '/activities'
+      fullPath: '/activities'
+      preLoaderRoute: typeof ActivitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistant': {
+      id: '/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/learning-checks': {
@@ -116,6 +195,27 @@ declare module '@tanstack/react-router' {
       path: '/learning-plans'
       fullPath: '/learning-plans'
       preLoaderRoute: typeof LearningPlansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/parent-communication': {
+      id: '/parent-communication'
+      path: '/parent-communication'
+      fullPath: '/parent-communication'
+      preLoaderRoute: typeof ParentCommunicationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/progress': {
+      id: '/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof ProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/learners/': {
@@ -137,8 +237,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivitiesRoute: ActivitiesRoute,
+  AssistantRoute: AssistantRoute,
   LearningChecksRoute: LearningChecksRoute,
   LearningPlansRoute: LearningPlansRoute,
+  ParentCommunicationRoute: ParentCommunicationRoute,
+  ProgressRoute: ProgressRoute,
+  SettingsRoute: SettingsRoute,
   LearnersLearnerIdRoute: LearnersLearnerIdRoute,
   LearnersIndexRoute: LearnersIndexRoute,
 }
