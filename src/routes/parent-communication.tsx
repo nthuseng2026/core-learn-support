@@ -45,14 +45,14 @@ function ParentCommunicationPage() {
   const [tone, setTone] = useState(TONES[0]!);
   const [notes, setNotes] = useState("");
 
-  const ai = useAiDraft("parent");
+  const ai = useAiDraft("communication");
   const learner = learnerById(learnerId);
   const recent = progress.filter((p) => p.learnerId === learnerId).slice(0, 3);
 
   function details() {
     return [
       `Learner: ${learner?.name ?? "Learner"} (${learner?.grade ?? ""})`,
-      `Parent/guardian: ${learner?.parentName ?? "Parent/guardian"}`,
+      `Parent/guardian: ${learner?.guardian ?? "Parent/guardian"}`,
       `Purpose of message: ${purpose}`,
       `Tone: ${tone}`,
       `Focus area: ${learner?.focus ?? ""}`,
@@ -149,11 +149,11 @@ function ParentCommunicationPage() {
             <dl className="mt-3 space-y-2 text-sm">
               <div>
                 <dt className="text-muted-foreground">Parent/guardian</dt>
-                <dd className="text-foreground">{learner?.parentName ?? "—"}</dd>
+                <dd className="text-foreground">{learner?.guardian ?? "—"}</dd>
               </div>
               <div>
                 <dt className="text-muted-foreground">Contact</dt>
-                <dd className="text-foreground">{learner?.parentContact ?? "—"}</dd>
+                <dd className="text-foreground">{learner?.guardianContact ?? "—"}</dd>
               </div>
               <div>
                 <dt className="text-muted-foreground">Focus area</dt>
