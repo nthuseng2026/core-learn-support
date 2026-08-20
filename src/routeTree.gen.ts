@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActivitiesRouteImport } from './routes/activities'
 import { Route as LearningChecksRouteImport } from './routes/learning-checks'
 import { Route as LearningPlansRouteImport } from './routes/learning-plans'
 import { Route as LearnersIndexRouteImport } from './routes/learners.index'
@@ -18,6 +19,11 @@ import { Route as LearnersLearnerIdRouteImport } from './routes/learners.$learne
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivitiesRoute = ActivitiesRouteImport.update({
+  id: '/activities',
+  path: '/activities',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LearningChecksRoute = LearningChecksRouteImport.update({
@@ -43,6 +49,7 @@ const LearnersLearnerIdRoute = LearnersLearnerIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
   '/learning-checks': typeof LearningChecksRoute
   '/learning-plans': typeof LearningPlansRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
   '/learning-checks': typeof LearningChecksRoute
   '/learning-plans': typeof LearningPlansRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activities': typeof ActivitiesRoute
   '/learning-checks': typeof LearningChecksRoute
   '/learning-plans': typeof LearningPlansRoute
   '/learners/$learnerId': typeof LearnersLearnerIdRoute
@@ -67,6 +76,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/activities'
     | '/learning-checks'
     | '/learning-plans'
     | '/learners/$learnerId'
@@ -74,6 +84,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/activities'
     | '/learning-checks'
     | '/learning-plans'
     | '/learners/$learnerId'
@@ -81,6 +92,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/activities'
     | '/learning-checks'
     | '/learning-plans'
     | '/learners/$learnerId'
@@ -89,6 +101,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivitiesRoute: typeof ActivitiesRoute
   LearningChecksRoute: typeof LearningChecksRoute
   LearningPlansRoute: typeof LearningPlansRoute
   LearnersLearnerIdRoute: typeof LearnersLearnerIdRoute
@@ -102,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activities': {
+      id: '/activities'
+      path: '/activities'
+      fullPath: '/activities'
+      preLoaderRoute: typeof ActivitiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/learning-checks': {
@@ -137,6 +157,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivitiesRoute: ActivitiesRoute,
   LearningChecksRoute: LearningChecksRoute,
   LearningPlansRoute: LearningPlansRoute,
   LearnersLearnerIdRoute: LearnersLearnerIdRoute,
