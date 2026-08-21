@@ -9,6 +9,7 @@ import {
   Users,
   Wand2,
 } from "lucide-react";
+import heroLearning from "@/assets/hero-learning.jpg";
 import { AppShell } from "@/components/app-shell";
 import { PageHeader } from "@/components/page-header";
 import { ResponsibleAiNotice } from "@/components/ai-output";
@@ -55,22 +56,33 @@ function Dashboard() {
 
   return (
     <AppShell>
-      <section className="card-soft bg-gradient-warm mb-8 overflow-hidden p-6 sm:p-10">
-        <Badge className="mb-4 bg-card text-foreground shadow-soft">Demonstration data</Badge>
-        <h1 className="text-2xl font-semibold text-foreground sm:text-4xl">
-          Welcome back to Nthuseng Learning Room
-        </h1>
-        <p className="mt-3 max-w-xl text-sm text-foreground/80 sm:text-base">
-          Support every learner's journey with personalised learning tools.
-        </p>
-        <div className="mt-6 flex flex-wrap gap-2">
-          {QUICK_ACTIONS.map(({ to, label, icon: Icon }) => (
-            <Button key={label} asChild variant={label === "Add Learner" ? "default" : "secondary"} size="lg">
-              <Link to={to}>
-                <Icon /> {label}
-              </Link>
-            </Button>
-          ))}
+      <section className="card-soft mb-8 overflow-hidden p-6 sm:p-10">
+        <div className="flex flex-col items-center gap-8 lg:flex-row">
+          <div className="flex-1">
+            <Badge className="mb-4 bg-card text-foreground shadow-soft">Demonstration data</Badge>
+            <h1 className="text-2xl font-semibold text-foreground sm:text-4xl">
+              Welcome back to Nthuseng Learning Room
+            </h1>
+            <p className="mt-3 max-w-xl text-sm text-foreground/80 sm:text-base">
+              Support every learner's journey with personalised learning tools.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {QUICK_ACTIONS.map(({ to, label, icon: Icon }) => (
+                <Button key={label} asChild variant={label === "Add Learner" ? "default" : "secondary"} size="lg">
+                  <Link to={to}>
+                    <Icon /> {label}
+                  </Link>
+                </Button>
+              ))}
+            </div>
+          </div>
+          <div className="w-full max-w-md shrink-0 lg:max-w-sm xl:max-w-md">
+            <img
+              src={heroLearning}
+              alt="A warm one-on-one learning scene with an educator and a learner surrounded by books and learning materials"
+              className="h-auto w-full rounded-2xl object-cover shadow-lift"
+            />
+          </div>
         </div>
       </section>
 
